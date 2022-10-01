@@ -1,0 +1,3 @@
+# Getting Started
+
+Each client organization must have at least an account to use the system. It is possible for a company that has a complex organization, internally or across several countries, to own multiple accounts that are bound to a root account. In order to give examples all along this documentation we will use a fake company called TBC (standing for The Big Company). TBC is the overall company and they have subsidiairies in France, UK, Ireland, and Sweden. They decide to create a root account called TBC and one child account per country, ie TBC-France, TBC-UK, TBC-Ireland, and TBC-Sweden.
