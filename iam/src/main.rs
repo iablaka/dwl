@@ -26,11 +26,11 @@ async fn get_account(account_id: web::Path<String>) -> impl Responder {
     
     use schema::account::dsl::*;
     
-    let account_id = account_id.into_inner();
+    let account_id: String = account_id.into_inner();
+    let uuid: uuid::Uuid = Uuid::try_parse(&account_id).unwrap();
     let connection = &mut establish_connection();
     let result = account
-        .filter(name.eq(account_id))
-        .limit(1)
+        .filter(id.eq(uuid))
         .load::<models::Account>(connection)
         .expect("Error loading accounts");
     HttpResponse::Ok().body(result.len().to_string())
