@@ -4,6 +4,7 @@ use dotenvy::dotenv;
 use std::env;
 use actix_web::{get, web, App, HttpServer, Responder, HttpResponse};
 use uuid::Uuid;
+use serde_json;
 
 mod models;
 mod schema;
@@ -27,13 +28,13 @@ async fn get_account(account_id: web::Path<String>) -> impl Responder {
     use schema::account::dsl::*;
     
     let account_id: String = account_id.into_inner();
-    let uuid: uuid::Uuid = Uuid::try_parse(&account_id).unwrap();
+    let uuid: uuid::Uuid = Uuid::try_parse(&account_id).expect("Invalid uuid format");
     let connection = &mut establish_connection();
     let result = account
         .filter(id.eq(uuid))
         .load::<models::Account>(connection)
         .expect("Error loading accounts");
-    HttpResponse::Ok().body(result.len().to_string())
+    HttpResponse::Ok().body("toto")
 }
 
 
