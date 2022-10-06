@@ -1,6 +1,6 @@
 -- Create Account table
 CREATE TABLE account (
-  id UUID PRIMARY KEY,
+  id VARCHAR PRIMARY KEY,
   name VARCHAR NOT NULL,
-  parent_id UUID NULL
+  parent_id VARCHAR NULL
 )

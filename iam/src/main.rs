@@ -3,7 +3,6 @@ use diesel::prelude::*;
 use dotenvy::dotenv;
 use std::env;
 use actix_web::{get, web, App, HttpServer, Responder, HttpResponse};
-use uuid::Uuid;
 use serde_json;
 
 mod models;
@@ -28,13 +27,12 @@ async fn get_account(account_id: web::Path<String>) -> impl Responder {
     use schema::account::dsl::*;
     
     let account_id: String = account_id.into_inner();
-    let uuid: uuid::Uuid = Uuid::try_parse(&account_id).expect("Invalid uuid format");
     let connection = &mut establish_connection();
     let result = account
-        .filter(id.eq(uuid))
+        .filter(id.eq(account_id))
         .load::<models::Account>(connection)
         .expect("Error loading accounts");
-    HttpResponse::Ok().body("toto")
+    HttpResponse::Ok().body(serde_json::to_string(&result[0]).unwrap())  //serde_json::to_string(&result).unwrap())
 }
 
 

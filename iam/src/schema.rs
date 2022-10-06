@@ -2,8 +2,8 @@
 
 diesel::table! {
     account (id) {
-        id -> Uuid,
+        id -> Varchar,
         name -> Varchar,
-        parent_id -> Nullable<Uuid>,
+        parent_id -> Nullable<Varchar>,
     }
 }
