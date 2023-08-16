@@ -4,9 +4,10 @@ from bson import ObjectId
 
 from iam.app import mongo
 
-rights_api = Blueprint('api', __name__)
+rights_api = Blueprint('rights_api', __name__)
 
 @rights_api.get('/rights')
+# @api_key_required
 def list_rights():
     response = {"rights": []}
     rights_cursor = mongo.db.rights.find()
